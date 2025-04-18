@@ -3,7 +3,11 @@ import { PrismaClient } from "../../../../generated/prisma";
 
 const prisma = new PrismaClient();
 
-const creatUser = async(payload) => {
+const creatUser = async(payload:{
+    name: string;
+    email:string;
+    phone:string
+}) => {
     const res = await prisma.customer.create({
         data: payload
     })
