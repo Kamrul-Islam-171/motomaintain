@@ -14,6 +14,46 @@ const creatUser = async(payload:{
     return res;
 }
 
+const getAllCustomers = async() => {
+    const res = await prisma.customer.findMany();
+    return res;
+}
+const getACustomer = async(id:string) => {
+    const res = await prisma.customer.findUniqueOrThrow({
+        where: {
+            customerId: id
+        }
+    });
+    return res;
+}
+
+const updateCustomer = async(id:string, payload: {
+    name:string;
+    phone:string
+}) => {
+    
+    const res = await prisma.customer.update({
+        where: {
+            customerId: id
+        },
+        data: payload
+    })
+    return res;
+}
+
+const deleteCustomer = async(id:string) => {
+    const res = await prisma.customer.delete({
+        where: {
+            customerId: id
+        }
+    })
+    return res;
+}
+
 export const userService = {
-    creatUser
+    creatUser,
+    getAllCustomers,
+    getACustomer,
+    updateCustomer,
+    deleteCustomer
 }

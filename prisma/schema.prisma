@@ -19,7 +19,7 @@ model Customer{
   customerId String @id @default(uuid())
   name String
   email String @unique
-  phone String @unique
+  phone String 
   createdAt DateTime @default(now())
   bikes Bike[]  // One-to-many relation with Bike
   @@map("customers")

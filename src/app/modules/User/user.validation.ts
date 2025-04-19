@@ -14,7 +14,19 @@ const createUserValidation = z.object({
         })
     })
 });
+const updateCustomerValidation = z.object({
+   
+    body: z.object({
+        name: z.string({
+            required_error: "Name is required!"
+        }).optional(),
+        phone: z.string({
+            required_error: "Contact Number is required!"
+        }).optional()
+    })
+});
 
 export const userValidation = {
-    createUserValidation
+    createUserValidation,
+    updateCustomerValidation
 }
