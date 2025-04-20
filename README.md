@@ -52,3 +52,31 @@ A backend API built to manage a bike servicing center. It handles CRUD operation
 - ⏳ **Pending/Overdue Services:** Fetch jobs older than 7 days
 - ❌ **Error Handling:** Unified response format with status and messages
 
+
+## 📥 GET APIs
+
+### 👤 Customers
+- `GET /api/customers`  
+  ➤ Fetch all customers.
+
+- `GET /api/customers/:customerId`  
+  ➤ Fetch a specific customer by ID.
+
+### 🏍️ Bikes
+- `GET /api/bikes`  
+  ➤ Fetch all bikes.
+
+- `GET /api/bikes/:bikeId`  
+  ➤ Fetch a specific bike by ID.
+
+### 🛠️ Services
+- `GET /api/services`  
+  ➤ Fetch all service records.
+
+- `GET /api/services/:serviceId`  
+  ➤ Fetch a specific service record.
+
+- `GET /api/services/status`  
+  ➤ Fetch pending or overdue services older than 7 days.
+
+
