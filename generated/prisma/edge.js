@@ -161,6 +161,10 @@ const config = {
         "fromEnvVar": null,
         "value": "windows",
         "native": true
+      },
+      {
+        "fromEnvVar": null,
+        "value": "rhel-openssl-3.0.x"
       }
     ],
     "previewFeatures": [],
@@ -182,12 +186,12 @@ const config = {
     "db": {
       "url": {
         "fromEnvVar": "DATABASE_URL",
-        "value": "postgresql://prisma1:prisma@localhost:5432/Moto_Maintain?schema=public"
+        "value": "postgres://neondb_owner:npg_zUs5YdOH1oQT@ep-royal-feather-a573j6bc-pooler.us-east-2.aws.neon.tech/neondb?sslmode=require"
       }
     }
   },
-  "inlineSchema": "// This is your Prisma schema file,\n// learn more about it in the docs: https://pris.ly/d/prisma-schema\n\n// Looking for ways to speed up your queries, or scale easily with your serverless or edge functions?\n// Try Prisma Accelerate: https://pris.ly/cli/accelerate-init\n\ngenerator client {\n  provider = \"prisma-client-js\"\n  output   = \"../generated/prisma\"\n}\n\ndatasource db {\n  provider = \"postgresql\"\n  url      = env(\"DATABASE_URL\")\n}\n\nmodel Customer {\n  customerId String   @id @default(uuid())\n  name       String\n  email      String   @unique\n  phone      String\n  createdAt  DateTime @default(now())\n  bikes      Bike[] // One-to-many relation with Bike\n\n  @@map(\"customers\")\n}\n\nmodel Bike {\n  bikeId     String          @id @default(uuid())\n  brand      String\n  model      String\n  year       Int\n  customerId String\n  customer   Customer        @relation(fields: [customerId], references: [customerId])\n  service    ServiceRecord[] // One-to-many relation with service records\n\n  @@map(\"bikes\")\n}\n\nmodel ServiceRecord {\n  serviceId      String    @id @default(uuid())\n  bikeId         String\n  serviceDate    DateTime\n  completionDate DateTime? //Nullable\n  description    String\n  status         STATUS\n\n  bikeService Bike @relation(fields: [bikeId], references: [bikeId])\n\n  @@map(\"serviceTable\")\n}\n\nenum STATUS {\n  pending\n  in_progress\n  done\n}\n",
-  "inlineSchemaHash": "1cf97b40187adcb13d98e8c7ecc2cd0a751d9232564d9c153bca95722d39fe6b",
+  "inlineSchema": "// This is your Prisma schema file,\n// learn more about it in the docs: https://pris.ly/d/prisma-schema\n\n// Looking for ways to speed up your queries, or scale easily with your serverless or edge functions?\n// Try Prisma Accelerate: https://pris.ly/cli/accelerate-init\n\ngenerator client {\n  provider      = \"prisma-client-js\"\n  output        = \"../generated/prisma\"\n  binaryTargets = [\"native\", \"rhel-openssl-3.0.x\"]\n}\n\ndatasource db {\n  provider = \"postgresql\"\n  url      = env(\"DATABASE_URL\")\n}\n\nmodel Customer {\n  customerId String   @id @default(uuid())\n  name       String\n  email      String   @unique\n  phone      String\n  createdAt  DateTime @default(now())\n  bikes      Bike[] // One-to-many relation with Bike\n\n  @@map(\"customers\")\n}\n\nmodel Bike {\n  bikeId     String          @id @default(uuid())\n  brand      String\n  model      String\n  year       Int\n  customerId String\n  customer   Customer        @relation(fields: [customerId], references: [customerId])\n  service    ServiceRecord[] // One-to-many relation with service records\n\n  @@map(\"bikes\")\n}\n\nmodel ServiceRecord {\n  serviceId      String    @id @default(uuid())\n  bikeId         String\n  serviceDate    DateTime\n  completionDate DateTime? //Nullable\n  description    String\n  status         STATUS\n\n  bikeService Bike @relation(fields: [bikeId], references: [bikeId])\n\n  @@map(\"serviceTable\")\n}\n\nenum STATUS {\n  pending\n  in_progress\n  done\n}\n",
+  "inlineSchemaHash": "3bcb0142d3cd4883912cc3972de6601fa8027a0d674931060909f2f8d2513c02",
   "copyEngine": true
 }
 config.dirname = '/'
